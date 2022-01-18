@@ -157,7 +157,11 @@ echo "Create App_Name: $CREATE_APP_NAME";
 echo "Git Hash: $GIT_HASH";
 echo "Use PostgreSQL: $USE_PSQL";
 echo "Heroku Verified: $HEROKU_VERIFIED";
-echo "Enable Autobus Backup: $ENABLE_AUTOBUS_BACKUP";
+echo "SMTP_SETUP: $ENABLE_AUTOBUS_BACKUP";
+echo "SMTP_HOST: $ENABLE_AUTOBUS_BACKUP";
+echo "SMTP_USERNAME: $ENABLE_AUTOBUS_BACKUP";
+echo "SMTP_PASSWORD: $ENABLE_AUTOBUS_BACKUP";
+echo "SMTP_FROM: $ENABLE_AUTOBUS_BACKUP";
 
 if [[ ${STRATEGY_TYPE} = "deploy" ]]
 then
