@@ -12,7 +12,7 @@ env:
   GIT_HASH: main
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
   HEROKU_VERIFIED: ${{ secrets.HEROKU_VERIFIED }}
-  SMTP_SETUP: ${{ secrets.EMAIL_SETUP }}
+  SMTP_SETUP: ${{ secrets.SMTP_SETUP }}
   SMTP_HOST: ${{ secrets.SMTP_HOST }} 
   SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
   SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
