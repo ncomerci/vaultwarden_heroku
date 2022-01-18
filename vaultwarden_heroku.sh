@@ -90,6 +90,17 @@ function check_addons {
     fi
 }
 
+function email_setup {
+
+    if [ "${SMTP_SETUP}" -eq "1" ]
+    then
+      echo "SMTP is enabled, enabling."
+      heroku config:set SMTP_HOST="${SMTP_HOST}" SMTP_FROM="${SMTP_FROM}" SMTP_PORT=587 SMTP_SSL=true SMTP_USERNAME="${SMTP_USERNAME}" SMTP_PASSWORD="${SMTP_PASSWORD}" -a "${APP_NAME}"
+    else
+      echo "SMTP is not enabled, skipping."
+    fi
+}
+
 function build_image {
     git_clone "${GIT_HASH}"
 
@@ -103,6 +114,8 @@ function build_image {
         # Thank you bryanjhv!
         heroku config:set _ENABLE_DUO=true -a "${APP_NAME}"
     fi
+
+    email_setup
 
     echo "Logging into Heroku Container Registry to push the image (this will add an entry in your Docker config)"
     heroku container:login
@@ -120,7 +133,7 @@ function help {
     printf "Welcome to help!\Use option -a for app name,\n-d <0/1> to enable duo,\n -g to set a git hash to clone Vaultwarden from,\n and -t to specify if deployment or update!"
 }
 
-while getopts a:b:d:g:p:t:u:v: flag
+while getopts a:b:d:g:p:t:u:v:s:h:n:w:f: flag
 do
     case "${flag}" in
         a) CREATE_APP_NAME=${OPTARG};;
@@ -131,6 +144,11 @@ do
         t) STRATEGY_TYPE=${OPTARG};;
         u) OFFSITE_HEROKU_DB=${OPTARG};;
         v) HEROKU_VERIFIED=${OPTARG};;
+        s) SMTP_SETUP=${OPTARG};;
+        h) SMTP_HOST=${OPTARG};;
+        n) SMTP_USERNAME=${OPTARG};;
+        w) SMTP_PASSWORD=${OPTARG};;
+        f) SMTP_FROM=${OPTARG};;
         *) HELP;;
     esac
 done
